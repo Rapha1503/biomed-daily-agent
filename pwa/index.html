@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#116466" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="BioMed Daily" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>BioMed Daily Agent</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/static/icon.svg" />
+    <link rel="icon" href="/static/icon.svg" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Veille biomédicale</p>
+          <h1>BioMed Daily</h1>
+        </div>
+        <div class="install-pill" id="installState">Installable</div>
+      </header>
+
+      <section class="panel">
+        <p class="disclaimer" id="disclaimer"></p>
+        <label class="field">
+          Sujet ntfy
+          <input id="ntfyTopic" type="text" placeholder="biomed-elinor-veille-2026" autocomplete="off" />
+        </label>
+        <div class="controls">
+          <label class="field small">
+            Articles par thème
+            <input id="articleCount" type="number" min="1" max="5" value="2" />
+          </label>
+          <label class="field small">
+            Jours récents
+            <input id="daysBack" type="number" min="1" max="30" value="7" />
+          </label>
+        </div>
+        <label class="checkline">
+          <input id="autoNotify" type="checkbox" checked />
+          Envoyer ntfy automatiquement
+        </label>
+        <button id="testNotify" class="secondary">Tester ntfy</button>
+        <button id="runWatch" class="primary">Générer la veille du jour</button>
+        <p id="status" class="status"></p>
+      </section>
+
+      <nav class="tabs" aria-label="Sections">
+        <button class="tab active" data-view="articles">Articles</button>
+        <button class="tab" data-view="journal">Journal</button>
+        <button class="tab" data-view="cards">Cartes</button>
+        <button class="tab" data-view="questions">Questions</button>
+      </nav>
+
+      <section id="articles" class="view active">
+        <div id="articlesList" class="article-list empty">Génère une veille pour voir les articles en français.</div>
+      </section>
+
+      <section id="journal" class="view">
+        <pre id="journalText" class="journal-box">Le journal quotidien apparaîtra ici.</pre>
+        <button id="sendNotify" class="secondary">Envoyer la notification maintenant</button>
+      </section>
+
+      <section id="cards" class="view">
+        <div id="flashcards" class="card-grid empty">Les cartes apparaîtront après la génération.</div>
+      </section>
+
+      <section id="questions" class="view">
+        <label class="field">
+          Ta question
+          <textarea id="question" rows="5" placeholder="Ex. Explique-moi le niveau de preuve des articles du jour."></textarea>
+        </label>
+        <label class="field">
+          Image optionnelle
+          <input id="imageInput" type="file" accept="image/png,image/jpeg" />
+        </label>
+        <img id="imagePreview" class="image-preview" alt="" hidden />
+        <button id="askButton" class="primary">Répondre</button>
+        <div id="answer" class="answer"></div>
+      </section>
+    </main>
+
+    <script src="/static/app.js" type="module"></script>
+  </body>
+</html>
