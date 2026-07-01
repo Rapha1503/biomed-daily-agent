@@ -1,0 +1,20 @@
+{
+  "name": "BioMed Daily Agent",
+  "short_name": "BioMed",
+  "description": "Veille biomédicale quotidienne en français.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7fbfb",
+  "theme_color": "#116466",
+  "orientation": "portrait",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/static/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
