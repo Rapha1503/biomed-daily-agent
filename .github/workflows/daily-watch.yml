@@ -1,0 +1,30 @@
+name: Veille biomédicale quotidienne
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 7 * * *"
+
+jobs:
+  daily-watch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le projet
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Lancer la veille et envoyer ntfy
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          NTFY_SERVER: ${{ secrets.NTFY_SERVER }}
+          NTFY_TOKEN: ${{ secrets.NTFY_TOKEN }}
+          ENTREZ_EMAIL: ${{ secrets.ENTREZ_EMAIL }}
+          ENTREZ_API_KEY: ${{ secrets.ENTREZ_API_KEY }}
+        run: python daily_watch.py --articles-per-topic 2 --days-back 1 --notify
